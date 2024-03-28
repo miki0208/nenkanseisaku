@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自己紹介フォーム</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #ff0000;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: rgba(23, 51, 189, 0.756)
+        }
+    </style>
+</head>
+<body>
+<h1 style="text-align: center;">プロフィール編集</h1>
+    <form action="a:toukou" method="post">
+        {% csrf_token %}
+        <label for="name">名前:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="hobby">趣味:</label>
+        <input type="text" id="hobby" name="hobby" required>
+
+        <label for="introduction">自己紹介:</label>
+        <textarea id="introduction" name="introduction" rows="4" required></textarea>
+
+        <button class="btn btn-primary my-2"type="button"onclick="location.href='{% url 'a:toukou' %}'">送信</button>
+    </form>
+    <h2 class = "float-right"><a href="{% url 'a:index' %}">home</a></h2>
+
+
+    <script>
+        function submitForm() {
+            var name = document.getElementById("name").value;
+            var hobby = document.getElementById("hobby").value;
+            var introduction = document.getElementById("introduction").value;
+    
+            // サーバーにデータを送信
+            fetch('/save_profile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value
+                },
+                body: JSON.stringify({
+                    name: name,
+                    hobby: hobby,
+                    introduction: introduction
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('プロフィールが保存されました！');
+                
+                // リダイレクト先のURLを指定
+                window.location.href = "../toukou";
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+
+</body>
+</html>
+

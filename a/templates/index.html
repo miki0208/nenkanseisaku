@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投稿</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .seisirou{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container seisirou">
+    <h1>投稿</h1>
+    {% if request.user.is_authenticated %}
+        <p>Welcome, {{ user.username }}! <a href="{% url 'accounts:logout' %}">Logout</a></p>
+        <h2><a href="{% url 'a:toukou' %}">投稿する</a></h2>
+        <h4><a href="{% url 'accounts:profile' %}">プロフィール設定</a></h4>
+    {% else %}
+        <h3><a href="{% url 'accounts:signup' %}">アカウント作成</a></h3>
+        <h3><a href="{% url 'accounts:login' %}">ログイン</a></h3>
+    {% endif %}
+    <div>
+        <h2>Tweets</h2>
+        {% for tweet in tweet_list %}
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">{{ tweet.name }}: {{ tweet.message }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

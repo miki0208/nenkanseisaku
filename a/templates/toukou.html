@@ -1,0 +1,23 @@
+<div class = "junya">
+    <h2>投稿</h2>
+    <h2><a href="{% url 'accounts:profile' %}">プロフィール設定</a></h2>
+    <form action="../post/" method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" name="name" />
+        </div>
+        <div>
+            <label for="message">Message:</label>
+            <input type="text" name="message" />
+        </div>
+        <input type="submit" value="決定" />
+    </form>
+</div>
+
+<style>
+    .junya{
+        text-align: center;
+        margin: 200px 0px
+    }
+</style>

@@ -1,0 +1,22 @@
+<h1>お問い合わせページ</h1>
+
+<form method="post">
+  {% csrf_token %}
+  <div>
+    <label for="name">名前:</label>
+    <input type="text" name="name" id="name" />
+  </div>
+  <div>
+    <label for="email">メールアドレス:</label>
+    <input type="email" name="email" id="email" />
+  </div>
+  <div>
+    <label for="subject">要件:</label>
+    <input type="text" name="subject" id="subject" />
+  </div>
+  <div>
+    <label for="message">メッセージ:</label>
+    <input type="text" name="message" id="message" />
+  </div>
+  <button type="submit">問い合わせ</button>
+</form>
